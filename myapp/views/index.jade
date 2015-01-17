@@ -3,7 +3,103 @@ html
 	head
 		title= title
 		link(rel='stylesheet', href='/stylesheets/style.css')
+		style.
+			video {
+
+				background: rgba(255,255,255,0.5);
+				border: 1px solid #ccc;
+			}
+			.grayscale {
+				+filter: grayscale(1);
+			}
+			.sepia {
+				+filter: sepia(1);
+			}
+			.blur {
+				+filter: blur(3px);
+			}
+
 		script.
+
+				window.addEventListener('DOMContentLoaded', function() {
+
+					//- var idx = 0;
+					//- var filters = ['grayscale', 'sepia', 'blur', 'brightness',
+					//-                'contrast', 'hue-rotate', 'hue-rotate2',
+					//-                'hue-rotate3', 'saturate', 'invert', ''];
+
+					//- function changeFilter(e) {
+					//-   var el = e.target;
+					//-   el.className = '';
+					//-   var effect = filters[idx++ % filters.length]; // loop through filters.
+					//-   if (effect) {
+					//-     el.classList.add(effect);
+					//-   }
+					//- }
+
+					//- document.querySelector('video').addEventListener(
+					//-     'click', changeFilter, false);
+
+
+
+
+					var v = document.getElementById('v');
+					navigator.getUserMedia = (navigator.getUserMedia || 
+						navigator.webkitGetUserMedia || 
+						navigator.mozGetUserMedia || 
+						navigator.msGetUserMedia);
+					if (navigator.getUserMedia) {
+						// Request access to video only
+					}
+					else {
+					alert('Sorry, the browser you are using doesn\'t support getUserMedia');
+					return;
+					}
+				});
+
+				var videoSource = '';
+
+
+				function startUserMedia(){
+						navigator.getUserMedia(
+							{
+								video:true,
+								audio:false
+							},        
+							function(stream) {
+								var url = window.URL || window.webkitURL;
+								v.src = url ? url.createObjectURL(stream) : stream;
+								videoSource = v.src;
+								document.getElementById("videoURL").innerHTML = "<p>" + videoSource + "</p>";
+
+								v.play();
+							},
+							function(error) {
+								alert('Something went wrong. (error code ' + error.code + ')');
+								return;
+							}
+						);
+				}
+
+				function snapshotGrab(){
+				  var video = document.querySelector('#v');
+				  var canvas = document.querySelector('canvas');
+				  var ctx = canvas.getContext('2d');
+				  var localMediaStream = null;
+				  function snapshot() {
+				    if (videoSource) {
+				      ctx.drawImage(video, 0, 0, 640, 900, 0, 0, 300, 300);
+				      // "image/webp" works in Chrome.
+				      // Other browsers will fall back to image/png.
+				      console.log(canvas.toDataURL('image/webp'))
+				      document.querySelector('img').src = canvas.toDataURL('image/webp');
+				    }
+				  }
+				  snapshot();
+				}
+
+
+
 				// This code loads the IFrame Player API code asynchronously.
 				var tag = document.createElement('script');
 				tag.src = "https://www.youtube.com/iframe_api";
@@ -30,6 +126,8 @@ html
 				}
 				function playVideo(){
 					player.playVideo();
+					startUserMedia();
+
 				}
 				// The API calls this function when the player's state changes.
 				// The function indicates that when playing a video (state=1),
@@ -42,7 +140,8 @@ html
 					}
 				}
 				function stopVideo() {
-					player.stopVideo();
+					snapshotGrab();
+					//player.stopVideo();
 				}
 
 				var videoDuration; 
@@ -51,11 +150,23 @@ html
 					videoDuration = player.getDuration();
 					document.getElementById("quickStats").innerHTML = "<p>" + videoDuration + " Seconds or " + Math.floor(videoDuration / 60) + " minutes</p>";
 				}
+
+
+
 	body
-		//p hello!
 		#quickStats
+		#videoURL
+
 		p
 		button(type='button', onclick="playVideo()") Play Video!
 		button(type='button', onclick="stopVideo()") Stop Video!
-		p
+		//- input(type='file', accept='image/*;capture=camera')
+		//- input(type='file', accept='video/*;capture=camcorder')
+		//- input(type='file', accept='audio/*;capture=microphone')
+
+		//- p
 		#player
+		p
+		video#v(autoplay='', style="height:320px; width: 450px;")
+		img(src='', style="height: 320px; width: 450px;")
+		canvas(style='display:none;')
