@@ -3,6 +3,23 @@ html
 	head
 		title= title
 		link(rel='stylesheet', href='/stylesheets/style.css')
+
+		link(rel='stylesheet', href='http://assets.ziggeo.com/css/ziggeo-betajs-player.min.css')
+		script(src='http://assets.ziggeo.com/js/ziggeo-jquery-json2-betajs-player.min.js')
+
+
+		script(src='//code.jquery.com/jquery-1.11.2.min.js')
+		// Latest compiled and minified CSS
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+		// Optional theme
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css')
+		// Latest compiled and minified JavaScript
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+		link(href='stylesheets/page.css', rel='stylesheet')
+
+		script.
+			ZiggeoApi.token = "cadb6da3bc21c58a7cbe699685daf03d";
+
 		style.
 			video {
 
@@ -19,84 +36,75 @@ html
 				+filter: blur(3px);
 			}
 
+			html {
+			position: relative;
+			min-height: 100%;
+			}
+			div {
+			color: white;
+			}
+			body {
+			font: 10px sans-serif;
+			shape-rendering: crispEdges;
+			margin-bottom: 60px;
+			background-color:#19B5FE;
+			}
 		script.
 
-				window.addEventListener('DOMContentLoaded', function() {
+				//- window.addEventListener('DOMContentLoaded', function() {
+				//- 	var v = document.getElementById('v');
+				//- 	navigator.getUserMedia = (navigator.getUserMedia || 
+				//- 		navigator.webkitGetUserMedia || 
+				//- 		navigator.mozGetUserMedia || 
+				//- 		navigator.msGetUserMedia);
+				//- 	if (navigator.getUserMedia) {
+				//- 		// Request access to video only
+				//- 	}
+				//- 	else {
+				//- 	alert('Sorry, the browser you are using doesn\'t support getUserMedia');
+				//- 	return;
+				//- 	}
+				//- });
 
-					//- var idx = 0;
-					//- var filters = ['grayscale', 'sepia', 'blur', 'brightness',
-					//-                'contrast', 'hue-rotate', 'hue-rotate2',
-					//-                'hue-rotate3', 'saturate', 'invert', ''];
+				//- var videoSource = '';
 
-					//- function changeFilter(e) {
-					//-   var el = e.target;
-					//-   el.className = '';
-					//-   var effect = filters[idx++ % filters.length]; // loop through filters.
-					//-   if (effect) {
-					//-     el.classList.add(effect);
-					//-   }
-					//- }
+				//- function startUserMedia(){
+				//- 		navigator.getUserMedia(
+				//- 			{
+				//- 				video:true,
+				//- 				audio:false
+				//- 			},        
+				//- 			function(stream) {
+				//- 				var url = window.URL || window.webkitURL;
+				//- 				v.src = url ? url.createObjectURL(stream) : stream;
+				//- 				videoSource = v.src;
+				//- 				document.getElementById("videoURL").innerHTML = "<p>" + videoSource + "</p>";
 
-					//- document.querySelector('video').addEventListener(
-					//-     'click', changeFilter, false);
+				//- 				v.play();
+				//- 			},
+				//- 			function(error) {
+				//- 				alert('Something went wrong. (error code ' + error.code + ')');
+				//- 				return;
+				//- 			}
+				//- 		);
+				//- }
 
-
-
-
-					var v = document.getElementById('v');
-					navigator.getUserMedia = (navigator.getUserMedia || 
-						navigator.webkitGetUserMedia || 
-						navigator.mozGetUserMedia || 
-						navigator.msGetUserMedia);
-					if (navigator.getUserMedia) {
-						// Request access to video only
-					}
-					else {
-					alert('Sorry, the browser you are using doesn\'t support getUserMedia');
-					return;
-					}
-				});
-
-				var videoSource = '';
-
-
-				function startUserMedia(){
-						navigator.getUserMedia(
-							{
-								video:true,
-								audio:false
-							},        
-							function(stream) {
-								var url = window.URL || window.webkitURL;
-								v.src = url ? url.createObjectURL(stream) : stream;
-								videoSource = v.src;
-								document.getElementById("videoURL").innerHTML = "<p>" + videoSource + "</p>";
-
-								v.play();
-							},
-							function(error) {
-								alert('Something went wrong. (error code ' + error.code + ')');
-								return;
-							}
-						);
-				}
-
-				function snapshotGrab(){
-				  var video = document.querySelector('#v');
-				  var canvas = document.querySelector('canvas');
-				  var ctx = canvas.getContext('2d');
-				  var localMediaStream = null;
-				  function snapshot() {
-				    if (videoSource) {
-				      ctx.drawImage(video, 0, 0, 640, 900, 0, 0, 300, 300);
-				      // "image/webp" works in Chrome.
-				      // Other browsers will fall back to image/png.
-				      console.log(canvas.toDataURL('image/webp'))
-				      document.querySelector('img').src = canvas.toDataURL('image/webp');
-				    }
-				  }
-				  snapshot();
-				}
+				//- function snapshotGrab(){
+				//-   var video = document.querySelector('#v');
+				//-   var canvas = document.querySelector('canvas');
+				//-   var ctx = canvas.getContext('2d');
+				//-   var localMediaStream = null;
+				//-   function snapshot() {
+				//-     if (videoSource) {
+				//-       ctx.drawImage(video, 0, 0, 640, 900, 0, 0, 300, 300);
+				//-       // "image/webp" works in Chrome.
+				//-       // Other browsers will fall back to image/png.
+				//-       console.log(canvas.toDataURL('image/webp'))
+				//-       document.querySelector('img').src = canvas.toDataURL('image/webp');
+				//-     }
+				//-   }
+				//-   snapshot();
+				//- }
 
 
 
@@ -110,12 +118,13 @@ html
 				var player;
 				function onYouTubeIframeAPIReady() {
 					player = new YT.Player('player', {
-						height: '390',
-						width: '640',
-						videoId: 'M7lc1UVf-VE',
+						height: '780',
+						width: '1280',
+						videoId: 'ln8gGDYUo-4',
 						events: {
 							'onReady': initVideo,
 							'onStateChange': onPlayerStateChange
+
 							}
 						}
 					);
@@ -126,47 +135,85 @@ html
 				}
 				function playVideo(){
 					player.playVideo();
-					startUserMedia();
-
+					//- startUserMedia();
+				}
+				function pauseVideo(){
+					player.pauseVideo();
 				}
 				// The API calls this function when the player's state changes.
 				// The function indicates that when playing a video (state=1),
 				// the player should play for six seconds and then stop.
 				var done = false;
+
 				function onPlayerStateChange(event) {
-					if (event.data == YT.PlayerState.PLAYING && !done) {
-						setTimeout(stopVideo, 6000);
-						done = true;
+					if (event.data == 2 && !done) {
+						window.location.href = "#container"
+						stopRecording();
 					}
 				}
+
 				function stopVideo() {
-					snapshotGrab();
-					//player.stopVideo();
+					player.stopVideo();
 				}
 
 				var videoDuration; 
 				
 				function initVideo(){
 					videoDuration = player.getDuration();
-					document.getElementById("quickStats").innerHTML = "<p>" + videoDuration + " Seconds or " + Math.floor(videoDuration / 60) + " minutes</p>";
+
+					//document.getElementById("quickStats").innerHTML = "<p>" + videoDuration + " Seconds or " + Math.floor(videoDuration / 60) + " minutes</p>";
 				}
 
-
-
 	body
-		#quickStats
-		#videoURL
+		.container#container(style='width: 350px')
+			.page-header
+				h1(align='center')
+					//- object(width='70px', height='70px', type='image/svg+xml', data='archive12.svg')
+					//- |           
+					p  Smileish
+					#replace_me
 
-		p
-		button(type='button', onclick="playVideo()") Play Video!
-		button(type='button', onclick="stopVideo()") Stop Video!
-		//- input(type='file', accept='image/*;capture=camera')
-		//- input(type='file', accept='video/*;capture=camcorder')
-		//- input(type='file', accept='audio/*;capture=microphone')
 
-		//- p
-		#player
-		p
-		video#v(autoplay='', style="height:320px; width: 450px;")
-		img(src='', style="height: 320px; width: 450px;")
-		canvas(style='display:none;')
+		.row
+			.col-md-12
+				#player
+			.col-md-6
+
+
+
+		//-#quickStats
+
+
+
+		script.
+			var embedding = ZiggeoApi.Embed.embed("#replace_me", {paramx: "value-x", paramy: "value-y", width:"320px", height:"200px"});
+			function startRecoding(){
+				embedding.record(); 
+			}
+			function stopRecording(){
+				embedding.stopRecord();
+			}
+			ZiggeoApi.Events.on("submitted", function (data) {
+				console.log(ZiggeoApi.Videos.source());
+			});
+			ZiggeoApi.Events.on("ready_to_record", function (data) {
+				embedding.record();
+				window.location.href="#player";
+				setTimeout(function() { playVideo(); }, 3000);
+				// Triggered when a video recorder is ready to record a video 
+			});
+			ZiggeoApi.Events.on("stop", function (data) {
+				stopVideo();
+				// Triggered when a playing video is stopped 
+			});
+
+			ZiggeoApi.Events.on("submitted", function (data) {
+				// Triggered when a video has been recorded 
+				console.log("here is ze data: ");
+				console.log(data);
+				console.log(data.video.token);
+				console.log(ZiggeoApi.Videos.get(data.video.token))
+				//window.location.href = "http://localhost:3000/";
+			});
+
+
