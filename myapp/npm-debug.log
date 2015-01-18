@@ -1,0 +1,86 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'child_process' ]
+2 info using npm@1.4.14
+3 info using node@v0.10.29
+4 warn package.json fs@0.0.2 fs is also the name of a node core module.
+5 warn package.json fs@0.0.2 No description
+6 warn package.json fs@0.0.2 No repository field.
+7 warn package.json fs@0.0.2 No README data
+8 warn package.json sys@0.0.1 No repository field.
+9 warn package.json sys@0.0.1 No README data
+10 verbose readDependencies using package.json deps
+11 verbose cache add [ 'child_process', null ]
+12 verbose cache add name=undefined spec="child_process" args=["child_process",null]
+13 verbose parsed url { protocol: null,
+13 verbose parsed url   slashes: null,
+13 verbose parsed url   auth: null,
+13 verbose parsed url   host: null,
+13 verbose parsed url   port: null,
+13 verbose parsed url   hostname: null,
+13 verbose parsed url   hash: null,
+13 verbose parsed url   search: null,
+13 verbose parsed url   query: null,
+13 verbose parsed url   pathname: 'child_process',
+13 verbose parsed url   path: 'child_process',
+13 verbose parsed url   href: 'child_process' }
+14 silly lockFile 4845fa97-child-process child_process
+15 verbose lock child_process /Users/kirthibanothu/.npm/4845fa97-child-process.lock
+16 silly lockFile 4845fa97-child-process child_process
+17 silly lockFile 4845fa97-child-process child_process
+18 verbose addNamed [ 'child_process', '' ]
+19 verbose addNamed [ null, '*' ]
+20 silly lockFile 512a7ef6-child-process child_process@
+21 verbose lock child_process@ /Users/kirthibanothu/.npm/512a7ef6-child-process.lock
+22 silly addNameRange { name: 'child_process', range: '*', hasData: false }
+23 verbose url raw child_process
+24 verbose url resolving [ 'https://registry.npmjs.org/', './child_process' ]
+25 verbose url resolved https://registry.npmjs.org/child_process
+26 info trying registry request attempt 1 at 03:13:27
+27 http GET https://registry.npmjs.org/child_process
+28 http 404 https://registry.npmjs.org/child_process
+29 verbose headers { date: 'Sun, 18 Jan 2015 09:11:19 GMT',
+29 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+29 verbose headers   'content-type': 'application/json',
+29 verbose headers   'cache-control': 'max-age=0',
+29 verbose headers   'content-length': '52',
+29 verbose headers   'accept-ranges': 'bytes',
+29 verbose headers   via: '1.1 varnish',
+29 verbose headers   age: '0',
+29 verbose headers   'x-served-by': 'cache-iad2139-IAD',
+29 verbose headers   'x-cache': 'MISS',
+29 verbose headers   'x-cache-hits': '0',
+29 verbose headers   'x-timer': 'S1421572279.485031,VS0,VE11',
+29 verbose headers   'keep-alive': 'timeout=10, max=50',
+29 verbose headers   connection: 'Keep-Alive' }
+30 silly registry.get cb [ 404,
+30 silly registry.get   { date: 'Sun, 18 Jan 2015 09:11:19 GMT',
+30 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+30 silly registry.get     'content-type': 'application/json',
+30 silly registry.get     'cache-control': 'max-age=0',
+30 silly registry.get     'content-length': '52',
+30 silly registry.get     'accept-ranges': 'bytes',
+30 silly registry.get     via: '1.1 varnish',
+30 silly registry.get     age: '0',
+30 silly registry.get     'x-served-by': 'cache-iad2139-IAD',
+30 silly registry.get     'x-cache': 'MISS',
+30 silly registry.get     'x-cache-hits': '0',
+30 silly registry.get     'x-timer': 'S1421572279.485031,VS0,VE11',
+30 silly registry.get     'keep-alive': 'timeout=10, max=50',
+30 silly registry.get     connection: 'Keep-Alive' } ]
+31 silly lockFile 512a7ef6-child-process child_process@
+32 silly lockFile 512a7ef6-child-process child_process@
+33 error 404 404 Not Found: child_process
+33 error 404
+33 error 404 'child_process' is not in the npm registry.
+33 error 404 You should bug the author to publish it
+33 error 404 It was specified as a dependency of 'myapp'
+33 error 404
+33 error 404 Note that you can also install from a
+33 error 404 tarball, folder, or http url, or git url.
+34 error System Darwin 14.0.0
+35 error command "node" "/usr/local/bin/npm" "install" "child_process"
+36 error cwd /Users/kirthibanothu/Documents/Projects/Smileish/myapp
+37 error node -v v0.10.29
+38 error npm -v 1.4.14
+39 error code E404
+40 verbose exit [ 1, true ]
