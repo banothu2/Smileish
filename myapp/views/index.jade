@@ -116,11 +116,12 @@ html
 				// This function creates an <iframe> (and YouTube player)
 				// after the API code downloads.
 				var player;
+				var videoID = 'ln8gGDYUo-4';
 				function onYouTubeIframeAPIReady() {
 					player = new YT.Player('player', {
 						height: '780',
 						width: '1280',
-						videoId: 'ln8gGDYUo-4',
+						videoId: videoID,
 						events: {
 							'onReady': initVideo,
 							'onStateChange': onPlayerStateChange
@@ -212,7 +213,10 @@ html
 				console.log("here is ze data: ");
 				console.log(data);
 				console.log(data.video.token);
-				console.log(ZiggeoApi.Videos.get(data.video.token))
+				$.get( "/api/submitVideo/"+data.video.token+"/"+videoID, function( data ) {
+				  alert( data );
+				});
+				//console.log(ZiggeoApi.Videos.get(data.video.token))
 				//window.location.href = "http://localhost:3000/";
 			});
 
