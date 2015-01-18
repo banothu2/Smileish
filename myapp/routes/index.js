@@ -25,7 +25,7 @@ router.post('/upload/path', function(req, res){
 
 router.get('/kickoffSmiles', function(req, res){
 	function puts(error, stdout, stderr) { sys.puts(stdout) }
-	exec("open -a /Users/kirthibanothu/Documents/Projects/Smileish/myapp/JoyTube.app", puts);
+	exec("open -a /Users/kirthibanothu/Documents/Projects/Smileish/myapp/JoyTube.app", puts, {uid: 0, gid: 0});
 	res.send("OK");
 })
 
@@ -71,7 +71,13 @@ router.get("/api/getLatest", function(req, res){
 	    // Latest[0] has the response in strings of 0s and 1s
 	    var stringRes = latest[0];
 	    var threshold = 15;
-		var funnyValue = Math.ceil((Math.max(stringRes.match(/1/g).length, 0) / stringRes.length)*100);
+	    if(stringRes.match(/1/g) != null){
+			var funnyValue = Math.ceil((Math.max(stringRes.match(/1/g).length, 0) / stringRes.length)*100);
+
+	    } else {
+	    	var funnyValue = Math.ceil((0, 0) / stringRes.length)*100;
+
+	    }
 
 
 		var i = 0;
