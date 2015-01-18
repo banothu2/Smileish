@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var fs = require('fs');
 
 var databaseUrl = "smileish"; // "username:password@example.com/mydb"
 var collections = ["responses"]
@@ -11,6 +11,29 @@ var db = require("mongojs").connect(databaseUrl, collections);
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
+
+router.post('/upload/path', function(req, res){
+
+    console.log(req.body.image_name);
+    console.log(req.body);
+
+});
+
+
+// router.get('/api/base64/:base64', function(req, res){
+// 	var base64Val = req.params.base64;
+// 	var base64_complex = base64Val.replace(/COMPLEX/g, "/");
+// 	var base64_static = base64_complex.replace(/STATIC/g, "+");
+
+// 	console.log("\n "+base64_static+" \n ");
+
+// 	fs.writeFile("out.png", base64_static, 'base64', function(err) {
+// 	  console.log("\nERROR HAPPENED\n");
+// 	});
+// 	console.log("worked!?");
+// 	res.send("something happened!");
+// })
+
 
 router.get('/api/submitVideo/:videoToken/:videoID', function(req, res) {
 	var videoTokenRes = req.params.videoToken;
