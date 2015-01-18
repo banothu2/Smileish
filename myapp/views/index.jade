@@ -1,7 +1,7 @@
 doctype html
 html
 	head
-		title= title
+		title Smileish
 		link(rel='stylesheet', href='/stylesheets/style.css')
 
 		link(rel='stylesheet', href='http://assets.ziggeo.com/css/ziggeo-betajs-player.min.css')
@@ -134,7 +134,16 @@ html
 				// This function creates an <iframe> (and YouTube player)
 				// after the API code downloads.
 				var player;
-				var videoID = 'X6b2ooaxyyc';//'ln8gGDYUo-4';
+
+				var videos = [
+					'X6b2ooaxyyc',
+					'ln8gGDYUo-4',
+					'S9Iq6LA7sZI',
+					'nTDud03nzCg',
+					'Skm154xJdek',
+					'6P1vf_7DoLA'
+				]
+				var videoID = videos[Math.floor(Math.random()*videos.length)];//'ln8gGDYUo-4';
 				function onYouTubeIframeAPIReady() {
 					player = new YT.Player('player', {
 						height: '780',
@@ -259,11 +268,24 @@ html
 				//console.log(data);
 				//console.log(data.video.token);
 				$.get( "/api/submitVideo/"+data.video.token+"/"+videoID, function( data ) {
-				  alert(data);
+				  //alert(data);
 				});
 
 				$.get("/api/getLatest", function(data){
+					//{
+					//- 	funnyVal: funnyValue,
+					//- 	stringResponse: stringRes,
+					//- 	smilesCount: countSmiles
+					//- }
 					console.log(data);
+
+					if(data.funnyValue < 15){
+						document.body.style.background = '#2c3e50';
+					} else {
+						document.body.style.background = '#27ae60';
+					}
+
+					alert("funny Value: " + data.funnyValue + " Number of times smiled: " + data.smilesCount);
 				})
 				//console.log(ZiggeoApi.Videos.get(data.video.token))
 				//window.location.href = "http://localhost:3000/";
