@@ -24,8 +24,8 @@ router.post('/upload/path', function(req, res){
 
 
 router.get('/kickoffSmiles', function(req, res){
-	function puts(error, stdout, stderr) { sys.puts(stdout) }
-	exec("open -a /Users/kirthibanothu/Documents/Projects/Smileish/myapp/JoyTube.app", puts, {uid: 0, gid: 0});
+	//function puts(error, stdout, stderr) { sys.puts(stdout) }
+	//exec("open -a /Users/kirthibanothu/Documents/Projects/Smileish/myapp/JoyTube.app", puts, {uid: 0, gid: 0});
 	res.send("OK");
 })
 
