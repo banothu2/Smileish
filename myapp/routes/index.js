@@ -25,8 +25,7 @@ router.post('/upload/path', function(req, res){
 
 router.get('/kickoffSmiles', function(req, res){
 	function puts(error, stdout, stderr) { sys.puts(stdout) }
-	var date;
-	date = exec("open -a /Users/kirthibanothu/Documents/Projects/Smileish/myapp/JoyTube.app", puts);
+	exec("open -a /Users/kirthibanothu/Documents/Projects/Smileish/myapp/JoyTube.app", puts);
 	res.send("OK");
 })
 
@@ -62,7 +61,7 @@ router.get("/api/allVideos/:videoID", function(req, res){
 router.get("/api/getLatest", function(req, res){
 	var value = "banana";
 
-	db.bananas.find({}).sort({x:-1}, function(err, docs) {
+	db.bananas.find({}).sort({_id:-1}, function(err, docs) {
 		var latest = [];
 		var count = 1;
 	    docs.forEach(function(resp){
@@ -72,7 +71,7 @@ router.get("/api/getLatest", function(req, res){
 	    // Latest[0] has the response in strings of 0s and 1s
 	    var stringRes = latest[0];
 	    var threshold = 15;
-		var funnyValue = Math.ceil((stringRes.match(/1/g).length / stringRes.length)*100)
+		var funnyValue = Math.ceil((Math.max(stringRes.match(/1/g).length, 0) / stringRes.length)*100);
 
 
 		var i = 0;
